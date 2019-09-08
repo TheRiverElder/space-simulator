@@ -33,12 +33,10 @@ let refresher = sm => spaceGraphic.drawSpace(sm);
 
 let spaceManager = new SpaceManager(refresher);
 
-let timeRate = 1;
-
 let prevTime = Date.now();
 let pid = setInterval(() => {
     let time = Date.now();
-    spaceManager.update((time - prevTime) / 1000 * timeRate);
+    spaceManager.update((time - prevTime) / 1000 * CONFIG.TIME_RATE);
     prevTime = time;
 }, 50);
 
@@ -68,8 +66,4 @@ function init() {
 }
 
 init();
-
-
-let starIdInput = document.getElementById('starIdInput');
-let starInfoOutput = document.getElementById('starInfoOutput');
 

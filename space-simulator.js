@@ -1,9 +1,5 @@
 
 
-
-
-let G = 9.8;
-
 class Star {
 
     static idCounter = 0;
@@ -54,7 +50,7 @@ class Star {
             return;
         }
 
-        let gravityValue = G * (this.mass * other.mass / this.position.sqrDistance(other.position));
+        let gravityValue = CONFIG.G * (this.mass * other.mass / this.position.sqrDistance(other.position));
         let gravityAtSelf = direction.normalize().mul(gravityValue);
         this.force.addSelf(gravityAtSelf);
         other.force.addSelf(gravityAtSelf.opposite());
