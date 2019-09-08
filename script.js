@@ -38,7 +38,7 @@ let pid = setInterval(() => {
     let time = Date.now();
     spaceManager.update((time - prevTime) / 1000 * CONFIG.TIME_RATE);
     prevTime = time;
-}, 50);
+}, 1 / CONFIG.UPS);
 
 
 function init() {

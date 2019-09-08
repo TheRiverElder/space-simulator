@@ -16,6 +16,8 @@ In the `config.js` change the value you want to change:
 
 - *G* the gravity constant, default 9.8
 - *TIME_RATE* how far the time flows, default 1.0
+- *UPS* Update Per Second, default 60, Attention: The bigger it is, the more computer resource will be taken
+- *RECORD_STEP* decides the record rate of the tail, default 3, Attention: The bigger it is, the more computer resource will be taken
 
 ---
 # 这是什么？
@@ -38,3 +40,5 @@ In the `config.js` change the value you want to change:
 
 - *G* 重力常数，默认 9.8
 - *TIME_RATE* 时间流速，默认 1.0
+- *UPS* 每秒刷新次次数（每秒帧数），默认 60，注：越大消耗资源越多
+- *RECORD_STEP* 轨迹记录的帧数间隔（每计算多少帧记录一次轨迹），默认 3，注：越大消耗资源越多

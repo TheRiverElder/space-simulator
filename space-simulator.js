@@ -19,7 +19,7 @@ class Star {
         this.deltaMass = 0;
 
         this.spaceManager = null;
-        this.tail = new Record(100, 1);
+        this.tail = new Record(100, CONFIG.RECORD_STEP);
     }
 
     die() {
@@ -137,7 +137,7 @@ class StaticStar extends Star {
             bigger.velocity = newVelocity;
             return;
         }
-        let gravityValue = G * (this.mass * other.mass / this.position.sqrDistance(other.position));
+        let gravityValue = CONFIG.G * (this.mass * other.mass / this.position.sqrDistance(other.position));
         let gravityAtSelf = direction.normalize().mul(gravityValue);
         this.force.addSelf(gravityAtSelf);
         other.force.addSelf(gravityAtSelf.opposite());
