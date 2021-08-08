@@ -78,7 +78,11 @@ class Vector {
         return new Vector(-this.x, -this.y);
     }
 
-
+    setSelf(vec) {
+        this.x = vec.x;
+        this.y = vec.y;
+        return this;
+    }
 
     addSelf(vec) {
         this.x += vec.x;

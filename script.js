@@ -15,16 +15,33 @@ cvsSpace.addEventListener('mousedown', (event) => {
     dragging = true;
     last = new Vector(event.offsetX, event.offsetY);
 });
-cvsSpace.addEventListener('mousemove', () => {
+cvsSpace.addEventListener('mousemove', (event) => {
     if (dragging) {
         let pos = new Vector(event.offsetX, event.offsetY);
-        let delta = pos.sub(last);
-        spaceGraphic.offset.addSelf(delta);
+        moveCanvas(last, pos);
         last = pos;
     }
 });
 cvsSpace.addEventListener('mouseup', () => dragging = false);
 cvsSpace.addEventListener('mouseleave', () => dragging = false);
+
+cvsSpace.addEventListener('wheel', (event) => {
+    scaleCanvas(-constraints(event.deltaY, -0.1, 0.1), new Vector(event.offsetX, event.offsetY));
+});
+
+function scaleCanvas(delta, mousePos) {
+    const oldScale = spaceGraphic.scale;
+    const newScale = constraints(oldScale + delta, 0.2, 10);
+    const newOffset = mousePos.sub(spaceGraphic.offset).mul(newScale / oldScale).opposite().add(mousePos);
+    spaceGraphic.offset.setSelf(newOffset);
+    spaceGraphic.scale = newScale;
+    console.log("scale", newScale);
+}
+
+function moveCanvas(lastMousePos, newMousePos) {
+    let delta = newMousePos.sub(lastMousePos);
+    spaceGraphic.offset.addSelf(delta);
+}
 
 
 let spaceGraphic = new SpaceGraphic(cvsSpace);
@@ -58,7 +75,7 @@ function init() {
         let star = new Star({
             mass: rand(10,3),
             position: new Vector(pl * Math.cos(pa), pl * Math.sin(pa)),
-            //velocity: new Vector(rand(3, -3), rand(3, -3)),
+            velocity: new Vector(rand(3, -3), rand(3, -3)),
             color: randColor(),
         });
         spaceManager.born(star);

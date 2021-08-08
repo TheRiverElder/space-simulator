@@ -5,6 +5,7 @@ class SpaceGraphic {
     constructor(canvas) {
         this.canvas = canvas;
         this.offset = new Vector(canvas.width / 2, canvas.height / 2);
+        this.scale = 1;
     }
 
     drawStarArrow(star) {
@@ -45,6 +46,8 @@ class SpaceGraphic {
     drawStar(star) {
         let g = this.canvas.getContext('2d');
         let {position: {x, y}, radius, color} = star;
+        x *= this.scale;
+        y *= this.scale;
         x += this.offset.x;
         y += this.offset.y;
 
@@ -83,12 +86,12 @@ class SpaceGraphic {
         g.strokeWidth = 2;
         g.beginPath();
         let {x, y} = tail.data[0];
-        g.moveTo(this.offset.x + x, this.offset.y + y);
+        g.moveTo(this.offset.x + x * this.scale, this.offset.y + y * this.scale);
         for (let i = 1; i < tail.data.length; i++) {
             let {x, y} = tail.data[i];
-            g.lineTo(this.offset.x + x, this.offset.y + y);
+            g.lineTo(this.offset.x + x * this.scale, this.offset.y + y * this.scale);
         }
-        g.lineTo(this.offset.x + star.position.x, this.offset.y + star.position.y);
+        g.lineTo(this.offset.x + star.position.x * this.scale, this.offset.y + star.position.y * this.scale);
         g.stroke();
     }
 

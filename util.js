@@ -19,3 +19,8 @@ function fillStrHead(original, totalLength, fillChar) {
 function randColor() {
     return '#' + fillStrHead(randInt(0xFFFFFF).toString(16), 6, '0');
 }
+
+function constraints(value, min = 0, max = Number.POSITIVE_INFINITY) {
+    if (Number.isNaN(value)) return min;
+    return Math.min(Math.max(min, value), max);
+}
