@@ -74,7 +74,8 @@ class Star {
 }
 
 class SpaceManager {
-    constructor(refresher) {
+    constructor(aliveRange, refresher) {
+        this.aliveRange = aliveRange;
         this.stars = [];
         this.staticStars = [];
         this.newBornStars = [];
@@ -104,6 +105,11 @@ class SpaceManager {
             }
         }
         this.stars.forEach(star => star.lateUpdate(dt));
+        this.stars.forEach(star => {
+            if (star.position.distance(Vector.ZERO) > this.aliveRange) {
+                star.die();
+            }
+        });
         this.stars.push(...this.newBornStars);
         this.newBornStars.splice(0, this.newBornStars.length);
         this.stars = this.stars.filter(star => star.exist);
